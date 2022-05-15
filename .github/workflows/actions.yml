@@ -21,4 +21,6 @@ jobs:
       - name: Change gradle permission
         run: chmod +x gradlew
       - name: Test with gradle
+        env:
+          APP_ENV: "hahava"
         run: ./gradlew test
