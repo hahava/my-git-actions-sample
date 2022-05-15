@@ -1,0 +1,24 @@
+name: my-git-actions-CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Change gradle permission
+        run: chmod +x gradlew
+      - name: Test with gradle
+        run: ./gradlew test
