@@ -5,6 +5,11 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
+    jacoco
+}
+
+jacoco {
+    toolVersion = "0.8.7"
 }
 
 group = "me.kalin"
@@ -32,4 +37,16 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    extensions.configure(JacocoTaskExtension::class) {
+        setDestinationFile(file("$buildDir/jacoco/jacoco.exec"))
+    }
+
+    finalizedBy("jacocoTestReport")
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+    finalizedBy("jacocoTestCoverageVerification")
 }

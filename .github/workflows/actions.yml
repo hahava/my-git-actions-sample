@@ -27,8 +27,8 @@ jobs:
           APP_ENV: "hahava"
         run: ./gradlew test
 
-      - name: PR Comment
-        uses: github-actions-up-and-running/pr-comment@v1.0.1
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
         with:
-          message: Test Success
-          repo-token: ${{ secrets.HAHAVA_GIT_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml

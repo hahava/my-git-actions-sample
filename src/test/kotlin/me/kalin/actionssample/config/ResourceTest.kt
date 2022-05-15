@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class ResourceTest {
-    @Value("\${app.env}")
-    lateinit var value: String
-
-
-    @Test
-    @DisplayName("터미널 환경 변수 테스트")
-    fun getEnvTest() {
-        Assertions.assertEquals(value, "hahava")
-    }
+//    @Value("\${app.env}")
+//    lateinit var value: String
+//
+//
+//    @Test
+//    @DisplayName("터미널 환경 변수 테스트")
+//    fun getEnvTest() {
+//        Assertions.assertEquals(value, "hahava")
+//    }
 }
