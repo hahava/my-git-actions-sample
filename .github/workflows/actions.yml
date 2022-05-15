@@ -27,10 +27,8 @@ jobs:
           APP_ENV: "hahava"
         run: ./gradlew test
 
-      - name: "checkout"
-        uses: actions/checkout@v2
-
-      - name: "detekt"
-        uses: natiginfo/action-detekt-all@1.20.0
+      - name: PR Comment
+        uses: github-actions-up-and-running/pr-comment@v1.0.1
         with:
-          args: --fail-fast --config detekt.yml
+          message: Test Success
+          repo-token: ${{ secrets.HAHAVA_GIT_TOKEN }}
