@@ -10,10 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch Dependabot metadata
-        id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v1.3.1
+      - uses: actions/checkout@v3
+
+      - name: Set JDK
+        uses: actions/setup-java@v1
         with:
-          alert-lookup: true
-          compat-lookup: true
-          github-token: "${{ secrets.HAHAVA_GIT_TOKEN }}"
+          java-version: 11
+
+      - name: Change gradle permission
+        run: chmod +x gradlew
+
+      - name: dependency check
+        run: ./gradlew dependencyCheckAnalyze
