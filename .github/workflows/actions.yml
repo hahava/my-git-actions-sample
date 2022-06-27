@@ -7,18 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  dependency-review:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v3
-      - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v2
-
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -30,13 +20,10 @@ jobs:
       - name: Change gradle permission
         run: chmod +x gradlew
 
-      - name: Test with gradle
-        env:
-          APP_ENV: "hahava"
-        run: ./gradlew test
+      - name: dependency check
+        run: ./gradlew dependencyCheckAnalyze
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+      - uses: actions/upload-artifact@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./build/reports/jacoco/test/jacocoTestReport.xml
+          name: my-artifact
+          path: build/
